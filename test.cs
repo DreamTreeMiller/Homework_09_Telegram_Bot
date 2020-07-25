@@ -6,5 +6,6 @@ namespace Homework_09
   {
 		// Added in branch b1
 		string b1 = "This is branch b1";
+		// Added another line
   }
 }

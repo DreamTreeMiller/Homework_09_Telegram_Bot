@@ -6,13 +6,11 @@
         xmlns:local="clr-namespace:Homework_09"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-	<!--This is branch b1-->
     <Grid>
 		<TextBlock HorizontalAlignment="Center"
 				   VerticalAlignment="Center"
 				   FontSize="30"
 				   >
-			This is branch b1
 		</TextBlock>
     </Grid>
 </Window>

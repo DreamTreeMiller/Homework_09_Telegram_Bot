@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Homework_09
 {
@@ -23,6 +24,15 @@ namespace Homework_09
 		public MainWindow()
 		{
 			InitializeComponent();
+			string sendFileIconFullPath = System.IO.Path.GetFullPath(@"Images\SendFilePaperClip.png");
+			string sendMessageIcon = System.IO.Path.GetFullPath(@"Images\SendMessage.png");
+			SendFileIcon.Source	   = new BitmapImage(new Uri(sendFileIconFullPath, UriKind.Absolute));
+			SendMessageIcon.Source = new BitmapImage(new Uri(sendMessageIcon, UriKind.Absolute));
+		}
+
+		private void MessagesRoll_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+		{
+
 		}
 	}
 }

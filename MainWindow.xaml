@@ -5,14 +5,165 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework_09"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-	<!--This is master branch-->
-    <Grid>
-		<TextBlock HorizontalAlignment="Center"
+        Title="File Bot" 
+		Height="450" MinHeight="450"
+		Width="400" MinWidth="400"
+		>
+	<Grid ShowGridLines="True">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="40"
+						   MinHeight="40"
+						   />
+			<RowDefinition Height="4*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0"
+				   Text="Send and Receive Files Bot"
+				   Margin="10, 0, 10, 5"
+				   HorizontalAlignment="Left"
 				   VerticalAlignment="Center"
-				   FontSize="30"
-				   >
-			This is master branch
-		</TextBlock>
-    </Grid>
+				   FontSize="18"
+				   FontWeight="Bold"
+				   Foreground="CadetBlue"/>
+		<ListBox x:Name="MessagesRoll" 
+				 Grid.Row="1"
+				 Margin="0"
+				 HorizontalContentAlignment="Stretch"
+				 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+				 DataContextChanged="MessagesRoll_DataContextChanged"
+				 >
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<TextBlock Text="{Binding }">
+
+						</TextBlock>
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="70"
+								  MinWidth="70" 
+								  />
+				<ColumnDefinition Width="*"
+								  />
+				<ColumnDefinition Width="70"
+								  MinWidth="70" 
+								  />
+			</Grid.ColumnDefinitions>
+			<Button x:Name="SendFileButton"
+					Grid.Column="0"
+					Margin="10,10, 10, 10"
+					Height="50"
+					Width="50"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Center"
+					>
+				<Button.Style>
+					<Style TargetType="{x:Type Button}">
+						<Setter Property="Background" Value="Transparent"/>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type Button}">
+									<Border Background="{TemplateBinding Background}">
+										<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Background" Value="LightCyan"/>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+				<Button.Resources>
+					<Style TargetType="Border">
+						<Setter Property="CornerRadius" Value="25"/>
+					</Style>
+				</Button.Resources>
+				<!---->
+				<Image x:Name="SendFileIcon"
+					   Height="30"
+					   Width="30"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center">
+				</Image>
+				<!---->
+				<!--
+				<TextBlock Foreground="CadetBlue"
+						   FontWeight="Bold"
+						   FontSize="15"
+						   TextWrapping="Wrap"
+						   TextAlignment="Center"
+						   >
+					Send File
+				</TextBlock>
+				-->
+
+			</Button>
+			<TextBox x:Name="InputMessaageField"
+					 Grid.Column="1"
+					 Margin="0,7"
+					 MinWidth="240"
+					 HorizontalContentAlignment="Stretch"
+					 BorderBrush="Gray"
+					 BorderThickness="1"
+					 />
+			<Button x:Name="SendMessageButton"
+					Grid.Column="2"
+					Margin="10,10, 10, 10"
+					Height="50"
+					Width="50"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Center"
+					>
+				<Button.Style>
+					<Style TargetType="{x:Type Button}">
+						<Setter Property="Background" Value="Transparent"/>
+						<Setter Property="Template">
+							<Setter.Value>
+								<ControlTemplate TargetType="{x:Type Button}">
+									<Border Background="{TemplateBinding Background}">
+										<ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+									</Border>
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+						<Style.Triggers>
+							<Trigger Property="IsMouseOver" Value="True">
+								<Setter Property="Background" Value="LightCyan"/>
+							</Trigger>
+						</Style.Triggers>
+					</Style>
+				</Button.Style>
+				<Button.Resources>
+					<Style TargetType="Border">
+						<Setter Property="CornerRadius" Value="25"/>
+					</Style>
+				</Button.Resources>
+				<!---->
+				<Image x:Name="SendMessageIcon"
+					   Height="30"
+					   Width="30"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Center">
+				</Image>
+				<!---->
+				<!--
+				<TextBlock Foreground="CadetBlue"
+						   FontWeight="Bold"
+						   FontSize="12"
+						   TextWrapping="Wrap"
+						   TextAlignment="Center"
+						   >
+					Send Message
+				</TextBlock>
+				-->
+			</Button>
+		</Grid>
+	</Grid>
 </Window>

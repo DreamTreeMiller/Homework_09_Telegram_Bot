@@ -30,14 +30,39 @@
 				 Margin="0"
 				 HorizontalContentAlignment="Stretch"
 				 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-				 DataContextChanged="MessagesRoll_DataContextChanged"
 				 >
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Grid>
-						<TextBlock Text="{Binding }">
-
-						</TextBlock>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition Height="*" />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+						<TextBlock Text="{Binding ID}" 
+								   Grid.Column="0" 
+								   Grid.Row="0"
+								   HorizontalAlignment="Left"
+								   TextAlignment="Left"
+								   />
+						<TextBlock Text="{Binding Text}" 
+								   Grid.Column="0" Grid.ColumnSpan="3"
+								   Grid.Row="1"
+								   HorizontalAlignment="Stretch"
+								   TextAlignment="Left"
+								   TextWrapping="Wrap"
+								   />
+						<TextBlock Text="{Binding StringFormat={}{0:dd-MM-yyyy HH:mm}, Path = MessageDT}" 
+								   Grid.Column="2" 
+								   Grid.Row="2"
+								   HorizontalAlignment="Left"
+								   TextAlignment="Left"
+								   />
 					</Grid>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
@@ -109,9 +134,11 @@
 					 Grid.Column="1"
 					 Margin="0,7"
 					 MinWidth="240"
-					 HorizontalContentAlignment="Stretch"
+					 HorizontalContentAlignment="Left"
+					 TextWrapping="Wrap"
 					 BorderBrush="Gray"
-					 BorderThickness="1"
+					 BorderThickness="1" KeyDown="InputMessaageField_KeyDown" 
+					 
 					 />
 			<Button x:Name="SendMessageButton"
 					Grid.Column="2"
@@ -119,7 +146,8 @@
 					Height="50"
 					Width="50"
 					HorizontalAlignment="Left"
-					VerticalAlignment="Center"
+					VerticalAlignment="Center" Click="SendMessageButton_Click"
+					
 					>
 				<Button.Style>
 					<Style TargetType="{x:Type Button}">

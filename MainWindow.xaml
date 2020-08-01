@@ -50,6 +50,18 @@
 								   HorizontalAlignment="Left"
 								   TextAlignment="Left"
 								   />
+						<TextBlock Text="{Binding UserName}" 
+								   Grid.Column="1" 
+								   Grid.Row="0"
+								   HorizontalAlignment="Left"
+								   TextAlignment="Left"
+								   />
+						<TextBlock Text="{Binding FirstName}" 
+								   Grid.Column="2" 
+								   Grid.Row="0"
+								   HorizontalAlignment="Left"
+								   TextAlignment="Left"
+								   />
 						<TextBlock Text="{Binding Text}" 
 								   Grid.Column="0" Grid.ColumnSpan="3"
 								   Grid.Row="1"

@@ -13,6 +13,8 @@ namespace Homework_09
 	class Message
 	{
 		public long ID { get; set; }
+		public long ChatID { get; set; }
+		public string FromTo { get; set; }
 		public string UserName { get; set; }
 		public string FirstName { get; set; }
 		public string LastName { get; set; }

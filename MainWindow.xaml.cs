@@ -18,6 +18,7 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using Telegram.Bot;
 using System.Threading;
+using Telegram.Bot.Types;
 
 namespace Homework_09
 {
@@ -42,70 +43,37 @@ namespace Homework_09
 
 			MessagesRoll.ItemsSource = engine.messagesRoll;
 
-			//MessagesRoll.ItemsSource = messagesRoll;
-
-			//// Запускаем бота
-			//token = File.ReadAllText(
-			//		System.IO.Path.GetFullPath("token"), Encoding.UTF8);
-			//token = token.Substring(0, 46);
-
-			//wc = new WebClient() { Encoding = Encoding.UTF8 };
-			//int update_id = 0;
-			//string startUrl = $@"https://api.telegram.org/bot{token}/";
-
-			//this.Dispatcher.Invoke(() =>
-			//{
-			//	//while (true)
-			//	//{
-			//		string url = $"{startUrl}getUpdates?offset={update_id}";
-			//		var r = wc.DownloadString(url);
-
-			//		var msgs = JObject.Parse(r)["result"].ToArray();
-
-			//		foreach (dynamic msg in msgs)
-			//		{
-			//			messagesRoll.Add(new Message()
-			//			{
-			//				ID = msg.message.from.id,
-			//				Text = msg.message.text,
-			//				MessageDT = DateTime.FromBinary((long)msg.message.date)
-			//			});
-			//		}
-			//		Thread.Sleep(100);
-			//	//}
-			//});
 		}
 
 
 		private void SendMessageButton_Click(object sender, RoutedEventArgs e)
 		{
-			engine.SendMessage(InputMessaageField.Text, );
+			if (String.IsNullOrEmpty(ContactID.Text)) return;
+			engine.SendMessage(ContactID.Text, FocusContact.Text, InputMessaageField.Text);
+
 			// Прокручиваем список, чтобы был виден его последний элемент
 			// Пример нашёл в инете 
 			var border = (Border)VisualTreeHelper.GetChild(MessagesRoll, 0);
 			var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
 			scrollViewer.ScrollToBottom();
+			// Очищаем поле ввода
 			InputMessaageField.Text = "";
 		}
 
 		private void InputMessaageField_KeyDown(object sender, KeyEventArgs e)
 		{
+			if (String.IsNullOrEmpty(ContactID.Text)) return;
 			if (e.Key == Key.Enter)
 			{
 				if (String.IsNullOrEmpty(InputMessaageField.Text)) return;
-				Message newMsg = new Message()
-				{
-					ID = ++globalID,
-					Text = InputMessaageField.Text,
-					MessageDT = DateTime.Now
-				};
-				messagesRoll.Add(newMsg);
+				engine.SendMessage(ContactID.Text, FocusContact.Text, InputMessaageField.Text);
+
 				// Прокручиваем список, чтобы был виден его последний элемент
 				// Пример нашёл в инете 
 				var border = (Border)VisualTreeHelper.GetChild(MessagesRoll, 0);
 				var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
 				scrollViewer.ScrollToBottom();
-
+				// Очищаем поле ввода
 				InputMessaageField.Text = "";
 			}
 		}

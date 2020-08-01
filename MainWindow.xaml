@@ -9,7 +9,7 @@
 		Height="450" MinHeight="450"
 		Width="400" MinWidth="400"
 		>
-	<Grid ShowGridLines="True">
+	<Grid ShowGridLines="False">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="40"
 						   MinHeight="40"
@@ -27,55 +27,55 @@
 				   Foreground="CadetBlue"/>
 		<ListBox x:Name="MessagesRoll" 
 				 Grid.Row="1"
-				 Margin="0"
+				 Margin="1"
+				 BorderThickness="1"
 				 HorizontalContentAlignment="Stretch"
 				 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
 				 >
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition />
-							<RowDefinition Height="*" />
-							<RowDefinition />
-						</Grid.RowDefinitions>
-						<TextBlock Text="{Binding ID}" 
-								   Grid.Column="0" 
-								   Grid.Row="0"
+					<GroupBox HorizontalAlignment="Stretch"
+							  Margin="3,1">
+						<GroupBox.Header>
+							<StackPanel Orientation="Horizontal">
+								<!--
+								<TextBlock Text="{Binding StringFormat=MsgId:{0}, Path = ID}" 
 								   HorizontalAlignment="Left"
 								   TextAlignment="Left"
 								   />
-						<TextBlock Text="{Binding UserName}" 
-								   Grid.Column="1" 
-								   Grid.Row="0"
+								<TextBlock Text=" " />
+								<TextBlock Text="{Binding StringFormat=ChtId:{0} , Path = ChatID}" 
 								   HorizontalAlignment="Left"
 								   TextAlignment="Left"
 								   />
-						<TextBlock Text="{Binding FirstName}" 
-								   Grid.Column="2" 
-								   Grid.Row="0"
+								<TextBlock Text=" " />
+								-->
+								<TextBlock Text="{Binding FromTo}" 
 								   HorizontalAlignment="Left"
 								   TextAlignment="Left"
 								   />
+								<!--
+								<TextBlock Text=" " />
+								<TextBlock Text="{Binding StringFormat=Fn:{0} , Path = FirstName}" 
+								   HorizontalAlignment="Left"
+								   TextAlignment="Left"
+								   />
+								-->
+							</StackPanel>
+						</GroupBox.Header>
+						<StackPanel>
 						<TextBlock Text="{Binding Text}" 
-								   Grid.Column="0" Grid.ColumnSpan="3"
-								   Grid.Row="1"
+								   FontSize="16"
 								   HorizontalAlignment="Stretch"
 								   TextAlignment="Left"
 								   TextWrapping="Wrap"
 								   />
-						<TextBlock Text="{Binding StringFormat={}{0:dd-MM-yyyy HH:mm}, Path = MessageDT}" 
-								   Grid.Column="2" 
-								   Grid.Row="2"
-								   HorizontalAlignment="Left"
-								   TextAlignment="Left"
+						<TextBlock Text="{Binding StringFormat={}{0:HH:mm}, Path = MessageDT}" 
+								   HorizontalAlignment="Right"
+								   TextAlignment="Center"
 								   />
-					</Grid>
+						</StackPanel>
+					</GroupBox>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
@@ -142,24 +142,41 @@
 				-->
 
 			</Button>
-			<TextBox x:Name="InputMessaageField"
-					 Grid.Column="1"
-					 Margin="0,7"
-					 MinWidth="240"
-					 HorizontalContentAlignment="Left"
-					 TextWrapping="Wrap"
-					 BorderBrush="Gray"
-					 BorderThickness="1" KeyDown="InputMessaageField_KeyDown" 
-					 
-					 />
+			<GroupBox x:Name="TextInputBox"
+					  Grid.Column="1"
+					  Margin="0,0,0,5"
+					  VerticalAlignment="Stretch"
+					  HorizontalAlignment="Stretch"
+					  >
+				<GroupBox.Header>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Сообщение для " />
+						<TextBlock x:Name="FocusContact" 
+								   Text="{Binding ElementName=MessagesRoll, Path=SelectedItem.UserName}"
+								   />
+						<TextBlock x:Name="ContactID"
+								   Text="{Binding ElementName=MessagesRoll, Path=SelectedItem.ChatID}"
+								   Visibility="Collapsed"
+								   />
+					</StackPanel>
+				</GroupBox.Header>
+				<TextBox x:Name="InputMessaageField"
+						 Margin="0,7"
+						 MinWidth="230"
+						 HorizontalContentAlignment="Left"
+						 TextWrapping="Wrap"
+						 BorderThickness="0" 
+						 KeyDown="InputMessaageField_KeyDown" 
+						 />
+			</GroupBox>	
 			<Button x:Name="SendMessageButton"
 					Grid.Column="2"
 					Margin="10,10, 10, 10"
 					Height="50"
 					Width="50"
 					HorizontalAlignment="Left"
-					VerticalAlignment="Center" Click="SendMessageButton_Click"
-					
+					VerticalAlignment="Center" 
+					Click="SendMessageButton_Click"
 					>
 				<Button.Style>
 					<Style TargetType="{x:Type Button}">

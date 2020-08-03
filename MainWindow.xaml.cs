@@ -56,6 +56,7 @@ namespace Homework_09
 			var border = (Border)VisualTreeHelper.GetChild(MessagesRoll, 0);
 			var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
 			scrollViewer.ScrollToBottom();
+			
 			// Очищаем поле ввода
 			InputMessaageField.Text = "";
 		}
@@ -73,9 +74,30 @@ namespace Homework_09
 				var border = (Border)VisualTreeHelper.GetChild(MessagesRoll, 0);
 				var scrollViewer = (ScrollViewer)VisualTreeHelper.GetChild(border, 0);
 				scrollViewer.ScrollToBottom();
+				
 				// Очищаем поле ввода
 				InputMessaageField.Text = "";
 			}
+		}
+
+		private void SendFileButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (String.IsNullOrEmpty(ContactID.Text)) return;
+
+			// Configure open file dialog box
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.FileName = "*"; // Default file name
+			dlg.DefaultExt = ".*"; // Default file extension
+			dlg.Filter = "(*.*)|*.*"; // Filter files by extension
+
+			// Show open file dialog box
+			bool? result = dlg.ShowDialog();
+
+			// Process open file dialog box results
+			if (result != true) return;
+
+			// Open document
+			engine.SendFile(MessagesRoll.SelectedItem, dlg.FileName);
 		}
 	}
 }
